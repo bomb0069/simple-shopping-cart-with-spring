@@ -1,0 +1,28 @@
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      show-details: always
+      group:
+        liveness:
+          include: '*'
+          exclude:
+            - db
+            - readinessState
+        readiness:
+          include: '*'
+  health:
+    livenessState:
+      enabled: true
+    readinessState:
+      enabled: true
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/toy
+    username: sealteam
+    password: sckshuhari
+    driver-class-name: com.mysql.cj.jdbc.Driver
