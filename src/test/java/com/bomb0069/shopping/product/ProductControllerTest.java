@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProductControllerTest {
+class ProductControllerTest {
     @Autowired
     private TestRestTemplate testRestTemplate;
 
@@ -31,12 +31,12 @@ public class ProductControllerTest {
     ProductResponse expectedProduct3 = new ProductResponse(3, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
 
     @AfterEach
-    public void clearData() {
+    void clearData() {
         repository.deleteAll();
     }
 
     @Test
-    public void getAllProductWithEmptyShouldBe0AtTotal() {
+    void getAllProductWithEmptyShouldBe0AtTotal() {
 
         ProductListResponse actualResult = testRestTemplate.getForObject("/api/v1/product", ProductListResponse.class);
 
@@ -44,7 +44,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void getAllProductShouldBe2ProductsWithTrainingBicycleAndDinnerSet() {
+    void getAllProductShouldBe2ProductsWithTrainingBicycleAndDinnerSet() {
         repository.save(productBalanceTrainingBicycle);
         repository.save(product43PieceDinnerSet);
 
@@ -56,7 +56,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void getAllProductWith3ProductsShouldBeReturnAllOfThat() {
+    void getAllProductWith3ProductsShouldBeReturnAllOfThat() {
         repository.save(productBalanceTrainingBicycle);
         repository.save(product43PieceDinnerSet);
         repository.save(product3);
@@ -70,7 +70,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void getProductId2ShouldBeReturnProduct43PieceDinnerSet() {
+    void getProductId2ShouldBeReturnProduct43PieceDinnerSet() {
         repository.save(product43PieceDinnerSet);
 
         ProductResponse actualProduct = testRestTemplate.getForObject("/api/v1/product/2", ProductResponse.class);
@@ -80,7 +80,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void getDoesntExistingProductShouldBeReturnError() {
+    void getDoesntExistingProductShouldBeReturnError() {
         ProductErrorResponse expectErrorResponse = new ProductErrorResponse(2);
 
         ProductErrorResponse actualProduct = testRestTemplate.getForObject("/api/v1/product/2",

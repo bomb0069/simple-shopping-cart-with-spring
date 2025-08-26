@@ -12,20 +12,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class ProductRepositoryTest {
+class ProductRepositoryTest {
 
     @Autowired
     ProductRepository productRepository;
 
     @Test
-    public void emptyProductShouldBeIsNotPresent() {
+    void emptyProductShouldBeIsNotPresent() {
 
         assertEquals(0, sizeOf(productRepository.findAll()));
 
     }
 
     @Test
-    public void oneOfProductShouldBeReturnThat() {
+    void oneOfProductShouldBeReturnThat() {
 
         productRepository.save(new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png"));
 
@@ -34,7 +34,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void twoOfProductShouldBeReturnAll() {
+    void twoOfProductShouldBeReturnAll() {
 
         productRepository.save(new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png"));
         productRepository.save(new Product(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png"));
@@ -48,7 +48,7 @@ public class ProductRepositoryTest {
         if (products instanceof Collection) {
             counter = ((Collection<?>) products).size();
         } else {
-            for (Object i : products) {
+            for (@SuppressWarnings("unused") Object ignored : products) {
                 counter++;
             }
         }
