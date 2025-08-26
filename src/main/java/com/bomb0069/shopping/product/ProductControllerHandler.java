@@ -10,7 +10,7 @@ public class ProductControllerHandler {
 
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<ProductErrorResponse> productNotFoundHandler(ProductNotFoundException exception) {
-        return new ResponseEntity<ProductErrorResponse>(new ProductErrorResponse(exception.getProductId()), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(new ProductErrorResponse(exception.getProductId()), HttpStatus.NOT_FOUND);
     }
 
 }

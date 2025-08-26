@@ -36,7 +36,6 @@ public class ProductErrorResponse {
         this.productId = productId;
     }
 
-
     @Override
     public boolean equals(Object product) {
 
@@ -48,10 +47,12 @@ public class ProductErrorResponse {
 
         ProductErrorResponse productResponse = (ProductErrorResponse) product;
 
-        if (productResponse.getProductId() == this.getProductId())
-            return true;
+        return productResponse.getProductId() == this.getProductId();
+    }
 
-        return false;
+    @Override
+    public int hashCode() {
+        return productId != null ? productId.hashCode() : 0;
     }
 
     @Override

@@ -19,12 +19,15 @@ public class ProductControllerTest {
     @Autowired
     ProductRepository repository;
 
-    Product productBalanceTrainingBicycle = new Product(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
+    Product productBalanceTrainingBicycle = new Product(1, "Balance Training Bicycle", 119.95,
+            "/Balance_Training_Bicycle.png");
     Product product43PieceDinnerSet = new Product(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
     Product product3 = new Product(3, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
 
-    ProductResponse expectedProductBalanceTrainingBicycle = new ProductResponse(1, "Balance Training Bicycle", 119.95, "/Balance_Training_Bicycle.png");
-    ProductResponse expectedProduct43PieceDinnerSet = new ProductResponse(2, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
+    ProductResponse expectedProductBalanceTrainingBicycle = new ProductResponse(1, "Balance Training Bicycle", 119.95,
+            "/Balance_Training_Bicycle.png");
+    ProductResponse expectedProduct43PieceDinnerSet = new ProductResponse(2, "43 Piece dinner Set", 12.95,
+            "/43_Piece_dinner_Set.png");
     ProductResponse expectedProduct3 = new ProductResponse(3, "43 Piece dinner Set", 12.95, "/43_Piece_dinner_Set.png");
 
     @AfterEach
@@ -52,7 +55,6 @@ public class ProductControllerTest {
         assertEquals(expectedProduct43PieceDinnerSet, actualResult.getProducts().get(1));
     }
 
-
     @Test
     public void getAllProductWith3ProductsShouldBeReturnAllOfThat() {
         repository.save(productBalanceTrainingBicycle);
@@ -74,6 +76,17 @@ public class ProductControllerTest {
         ProductResponse actualProduct = testRestTemplate.getForObject("/api/v1/product/2", ProductResponse.class);
 
         assertEquals(expectedProduct43PieceDinnerSet, actualProduct);
+
+    }
+
+    @Test
+    public void getDoesntExistingProductShouldBeReturnError() {
+        ProductErrorResponse expectErrorResponse = new ProductErrorResponse(2);
+
+        ProductErrorResponse actualProduct = testRestTemplate.getForObject("/api/v1/product/2",
+                ProductErrorResponse.class);
+
+        assertEquals(expectErrorResponse, actualProduct);
 
     }
 }
